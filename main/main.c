@@ -1204,20 +1204,27 @@ void hsv_to_rgb(uint16_t h, uint8_t s, uint8_t v, uint8_t *r, uint8_t *g, uint8_
 
 void led_idle_animation()
 {
+    // No LEDs while waiting for wake phrase - completely dark
+    fill_solid(leds, LED_RING_LEDS, (CRGB)CRGB_BLACK);
+    FastLED_show();
+}
+
+void led_wake_detected_animation()
+{
     static uint8_t brightness = 0;
-    static int8_t direction = 2;
+    static int8_t direction = 3;
     static uint32_t last_update = 0;
     uint32_t current_time = xTaskGetTickCount() * portTICK_PERIOD_MS;
 
-    if (current_time - last_update >= 50) // Slower update rate for calmer effect
+    if (current_time - last_update >= 80) // Slow update rate for gentle pulse
     {
         brightness += direction;
-        if (brightness >= 80 || brightness <= 5) // Lower max brightness for calm effect
+        if (brightness >= 120 || brightness <= 10) // Gentle pulse range
         {
             direction = -direction;
         }
 
-        // Calm white pulse on all LEDs with gentle breathing effect
+        // Slow pulsing white to indicate wake word detected
         for (int i = 0; i < LED_RING_LEDS; i++) {
             leds[i].r = brightness;
             leds[i].g = brightness;
@@ -1227,13 +1234,6 @@ void led_idle_animation()
 
         last_update = current_time;
     }
-}
-
-void led_wake_detected_animation()
-{
-    // Solid white ring to indicate wake word detected
-    fill_solid(leds, LED_RING_LEDS, (CRGB)CRGB_WHITE);
-    FastLED_show();
 }
 
 void led_listening_animation()
