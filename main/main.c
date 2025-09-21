@@ -1247,11 +1247,11 @@ void led_listening_animation()
         direction = -direction;
     }
 
-    // Red breathing effect while listening for commands
+    // White breathing effect while listening for commands
     for (int i = 0; i < LED_RING_LEDS; i++) {
         leds[i].r = brightness;
-        leds[i].g = 0;
-        leds[i].b = 0;
+        leds[i].g = brightness;
+        leds[i].b = brightness;
     }
     FastLED_show();
 }

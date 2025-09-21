@@ -25,7 +25,7 @@ This project integrates ESP-SR speech recognition with a Chronos-inspired LED ti
 - **Multiple Animation States**:
   - No LEDs (waiting for wake word - completely dark)
   - Slow pulsing white (wake word detected)
-  - Red breathing (listening for commands)
+  - White breathing (listening for commands)
   - Green flash (command confirmed)
   - Timer progress visualization
   - Rainbow completion animation
@@ -94,7 +94,7 @@ This project integrates ESP-SR speech recognition with a Chronos-inspired LED ti
 |-------|-------------|-------|-------------|
 | **Idle** | Off | None | Waiting for wake word (completely dark) |
 | **Wake Detected** | Slow pulse | White | Ready for command |
-| **Listening** | Breathing | Red | Processing speech |
+| **Listening** | Breathing | White | Processing speech |
 | **Command Confirmed** | Flash | Green | Command accepted |
 | **Timer Active** | Progress arc | Configurable | Timer visualization |
 | **Timer Paused** | Slow pulse | Timer color | Paused state |
